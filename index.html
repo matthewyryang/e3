@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+    <!-- Replace the content tag with appropriate information -->
+    <meta name="description" content="MRT: Meta Reinforcement Finetuning" />
+    <meta property="og:title" content="MRT: Meta Reinforcement Finetuning" />
+    <meta
+      property="og:description"
+      content="MRT: Meta Reinforcement Finetuning"
+    />
+    <meta property="og:url" content="https://cohenqu.github.io/mrt.github.io/" />
+    <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+    <meta property="og:image" content="static/image/overview.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta name="twitter:title" content="MRT: Meta Reinforcement Finetuning" />
+    <meta
+      name="twitter:description"
+      content="MRT: Meta Reinforcement Finetuning"
+    />
+    <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+    <meta
+      name="twitter:image"
+      content="static/image/overview.png"
+    />
+    <meta name="twitter:card" content="static/image/overview.png" />
+    <!-- Keywords for your paper to be indexed by-->
+    <meta name="keywords" content="MRT: Meta Reinforcement Finetuning" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>MRT</title>
+    <link rel="icon" type="image/x-icon" href="static/images/icon.png" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="static/css/bulma.min.css" />
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css" />
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css" />
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
+    />
+    <link rel="stylesheet" href="static/css/index.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+    <script defer src="static/js/fontawesome.all.min.js"></script>
+    <script src="static/js/bulma-carousel.min.js"></script>
+    <script src="static/js/bulma-slider.min.js"></script>
+    <script src="static/js/index.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        prefix: 'tw-', // This makes all Tailwind classes start with 'tw-'
+      };
+    </script>
+  </head>
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column has-text-centered">
+              <h2 class="title is-2 publication-title ">
+                Optimizing Test-Time Compute via Meta Reinforcement Finetuning
+              </h2>
+              <div class="is-size-5 publication-authors">
+                <!-- Paper authors -->
+                <span class="author-block">
+                  <a href="https://cohenqu.github.io/" target="_blank"
+                    >Yuxiao Qu<sup>*1</sup></a
+                  >
+                  ,
+                </span>
+                <span class="author-block">
+                  <a href="https://www.matthewyryang.com/" target="_blank"
+                    >Matthew Y. R. Yang<sup>*1</sup></a
+                  >
+                  ,
+                </span>
+                <span class="author-block">
+                  <a href="https://scholar.google.com/citations?user=i7V1kJgAAAAJ&hl=en" target="_blank"
+                    >Amrith Setlur<sup>1</sup></a
+                  >
+                  ,
+                </span>
+                <span class="author-block">
+                  <a href="https://lewtun.github.io/blog/about/" target="_blank"
+                    >Lewis Tunstall<sup>2</sup></a
+                  >
+                  ,
+                </span>
+                <span class="author-block">
+                  <a href="https://edbeeching.github.io/" target="_blank"
+                    >Edward Emanuel Beeching<sup>2</sup></a
+                  >
+                  ,
+                </span>
+                <span class="author-block">
+                  <a href="https://www.cs.cmu.edu/~rsalakhu/" target="_blank"
+                    >Ruslan Salakhutdinov<sup>1</sup></a
+                  >
+                  ,
+                </span>
+                <span class="author-block">
+                  <a href="https://aviralkumar2907.github.io/" target="_blank"
+                    >Aviral Kumar<sup>1</sup></a
+                  >
+                  ,
+                </span>
+              </div>
+
+              <div class="is-size-5 publication-authors">
+                <span class="author-block">
+                  <sup>1</sup>Carnegie Mellon University,
+                  <sup>2</sup>HuggingFace, 
+                  <sup>*</sup>Equal Contribution
+                </span>
+              </div>
+
+              <div class="column has-text-centered">
+                <div class="publication-links">
+                  <!-- ArXiv abstract Link -->
+                  <span class="link-block">
+                    <a
+                      href="http://arxiv.org/abs/2407.18219"
+                      target="_blank"
+                      class="external-link button is-normal is-rounded is-dark"
+                    >
+                      <span class="icon">
+                        <i class="ai ai-arxiv"></i>
+                      </span>
+                      <span>arXiv</span>
+                    </a>
+                  </span>
+
+                  <!-- <span class="link-block">
+                    <a
+                      href="https://www.youtube.com/watch?v=Qv8aTLthfhs"
+                      target="_blank"
+                      class="external-link button is-normal is-rounded is-dark"
+                    >
+                      <span class="icon">
+                        <i class="fab fa-youtube"></i>
+                      </span>
+                      <span>Video</span>
+                    </a>
+                  </span> -->
+
+                  <!-- Github link -->
+                  <span class="link-block">
+                    <a
+                      href="https://github.com/cmu-mind/RISE"
+                      target="_blank"
+                      class="external-link button is-normal is-rounded is-dark"
+                    >
+                      <span class="icon">
+                        <i class="fab fa-github"></i>
+                      </span>
+                      <span>Code</span>
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Teaser video-->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <div class="has-text-centered">
+        <div class="text-center">
+          <img src="static/images/teaser.png" alt="Meta Reinforcement Finetuning" class="mx-auto"/>
+        </div>
+      </div>
+      <h2 class="subtitle">
+        <b>Meta Reinforcement Finetuning (MRT)</b> introduces a novel paradigm that treats the problem-solving process as a series of correlated episodes with dense information gain rewards. While traditional reinforcement learning methods focus solely on optimizing the final outcome reward. MRT dynamically assigns varying rewards to intermediate episodes based on their information contribution, teaching the model to efficiently optimize its compute resources and minimize cumulative regret across multiple solution attempts. This meta-learning approach enables LLMs to develop more sophisticated problem-solving strategies beyond what was used for training.
+      </h2>
+    </div>
+  </div>
+</section>
+    <!-- End teaser video -->
+
+    <!-- Paper abstract -->
+    <section class="section hero is-light">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Abstract</h2>
+            <div class="content has-text-justified">
+              <p>
+                Training models to efficiently use test-time compute is crucial for improving the reasoning performance of LLMs. While current methods mostly do so via fine-tuning on search traces or running RL against the 0/1 outcome reward, do these approaches efficiently utilize test-time compute? Would these approaches continue to scale as the budget improves? In this paper, we try to answer these questions. We formalize the problem of optimizing test-time compute as a meta reinforcement learning (RL) problem, which provides a principled perspective on spending test-time compute from the lens of exploration and exploitation. It also motivates the use of cumulative regret to measure the efficacy of test-time compute by viewing a long output stream as consisting of several episodes from the model. While current state-of-the-art models do not optimize regret, we show that regret can be minimized by running final 0/1 reward RL regularized by a dense reward bonus, given by the <i>''information gain''</i> from each subsequent block in the output stream. We prescribe an approach for quantifying information gain, which measures the utility of an intermediate segment of tokens towards improving accuracy of the final answer. We instantiate this idea to develop <b><i>MRT</i></b>, a new class of finetuning methods for optimizing test-time compute. Fine-tuning with <b><i>MRT</i></b> leads to substantial improvements in both performance and token efficiency on various number of math benchmarks.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End paper abstract -->
+    <section class="section" , id="What Do We Want at Test Time">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <h2 class="title is-3" id="setup">What Do We Want at Test Time </h2>
+
+            <div class="tw-flex tw-flex-wrap tw-justify-center tw-gap-4">
+              <div class="tw-p-6 tw-shadow-lg tw-rounded-2xl tw-max-w-3xl tw-flex-1 tw-min-w-[300px]">
+                  <h2 class="tw-text-xl tw-font-semibold tw-text-gray-700 tw-mb-4">Easy Problem</h2>
+                  <div class="tw-space-y-4">
+                      <div class="tw-flex tw-items-start">
+                          <div class="tw-bg-blue-100 tw-p-3 tw-rounded-lg tw-max-w-xs">
+                              <p class="tw-text-gray-700">2+2=?</p>
+                          </div>
+                      </div>
+                      <div class="tw-flex tw-items-start tw-justify-end">
+                          <div class="tw-bg-green-100 tw-p-3 tw-rounded-lg tw-max-w-xl">
+                              <p class="tw-text-gray-700">
+                                  <p>&lt;think&gt;</p>
+                                  <p>Okay, so I need to figure out what 2 plus 2 equals.</p>
+                                  <p>Let me count them out. One, two, and then three, four...</p>
+                                  <p>&lt;/think&gt;</p>
+                                  <p><b>Step-by-Step Explanation:</b></p>
+                                  <ol>
+                                      <li>- Start with the numbers: 2 and 2.</li>
+                                      <li>- Combine their quantities: Add the two numbers together.</li>
+                                      <li>- Result: 2 + 2 = 4.</li>
+                                  </ol>
+                                  <p><b>Answer: 4</b></p>
+                              </p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="tw-p-6 tw-shadow-lg tw-rounded-2xl tw-max-w-3xl tw-flex-1 tw-min-w-[300px]">
+                  <div class="tw-space-y-4">
+                      <h2 class="tw-text-xl tw-font-semibold tw-text-gray-700 tw-mb-4">Hard Problem</h2>
+                      <div class="tw-flex tw-items-start">
+                          <div class="tw-bg-blue-100 tw-p-3 tw-rounded-lg tw-max-w-xs">
+                              <p class="tw-text-gray-700">
+                                  <p>Show that the inequality</p>
+                                  <img src="https://latex.codecogs.com/svg.latex?\sum_{i=1}^n\sum_{j=1}^n\sqrt{\left|x_i-x_j\right|}\leq\sum_{i=1}^n\sum_{j=1}^n\sqrt{\left|x_i+x_j\right|}" title="\sum_{i=1}^n\sum_{j=1}^n\sqrt{\left|x_i-x_j\right|}\leq\sum_{i=1}^n\sum_{j=1}^n\sqrt{\left|x_i+x_j\right|}" />
+                                  <p>holds for all real numbers </p>
+                              </p>
+                          </div>
+                      </div>
+                      <div class="tw-flex tw-items-start tw-justify-end">
+                          <div class="tw-bg-green-100 tw-p-3 tw-rounded-lg tw-max-w-xl">
+                              <p class="tw-text-gray-700">
+                                  <p>&lt;think&gt;</p>
+                                  <p>Okay, so I need to show that for any real numbers ...</p>
+                                  <p>Alternatively, <b>perhaps there's a way to pair terms or use symmetry?</b></p>
+                                  <p>Alternatively, <b>could we relate this inequality to some function property?</b></p>
+                                  <p>...</p>
+                                  <p>Time is up</p>
+                                  <p>&lt;/think&gt;</p>
+                                  <p><b>Step-by-Step Explanation:</b></p>
+                                  <ol>
+                                      <li>...</li>
+                                  </ol>
+                              </p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+            <p class="tw-text-center tw-text-sm tw-text-gray-500 tw-mt-4">
+                Generated by <a href="https://huggingface.co/deepseek-ai/DeepSeek-R1" class="text-blue-500 underline">DeepSeek-R1</a>
+            </p>
+            </br>
+
+            <div class="content has-text-justified tw-bg-blue-100 p-3 rounded-lg text-center mb-4">
+                <p><b>Desideratum 1: Don’t spend too many tokens on easy questions!</b></p>
+            </div>
+            <div class="content has-text-justified">
+                <p>On easy problems, we expect the model to quickly arrive at the correct answer without spending too many tokens. However, recent models, i.e., DeepSeek-R1, when asked a simple question like '2+2=?', eventually arrive at the correct answer, but not before going through an unnecessarily complex process. They first perform a direct calculation, then (as highlighted in gray) criticize themselves and re-evaluate the problem from multiple angles.
+              </p>
+            </div>
+            
+            <div class="content has-text-justified tw-bg-blue-100 p-3 rounded-lg text-center mb-4">
+                <p><b>Desideratum 2: Keep making progress on hard questions!</b></p>
+            </div>
+            
+            <div class="content has-text-justified">
+                <p>On hard problems, even though the given token budget is not sufficient to solve the problem, we expect the model to make progress towards the correct answer. However, recent models, i.e., DeepSeek-R1, when asked a hard question like the inequality above, frequently change their logical direction, using phrases like <it>'Wait'</it>, <it>'Alternatively'</it>, and <it>'Let's try something else'</it>. At one point, they even express frustration - much like a human would. While this mirrors how humans sometimes tackle difficult problems by changing approaches when stuck, there's a crucial difference - humans typically learn from their previous attempts and build upon that knowledge to make progress. The example shown above, however, tends to start fresh each time with seemingly random strategies, rather than leveraging insights from its earlier attempts.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section" , id="Do Current Models Meet Our Desiderata? A Case Study of DeepSeek-R1">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <h2 class="title is-3" id="setup">Do Current Models Meet Our Desiderata? A Case Study of DeepSeek-R1</h2>
+                        <div class="content has-text-justified">
+              <!-- Create Bullet Point List to Summarize -->
+                <div style="display: flex; justify-content: center; gap: 20px; align-items: center;"><img
+                  src="static/images/r1_analysis_exp_setup.png"
+                  alt="R1 Experiment Setup"
+                  width="40%"
+                />
+                <img
+                  src="static/images/r1_analysis_results.png"
+                  alt="R1 Analysis Results"
+                  width="40%"
+                />
+                <!-- <div style="width: 1px; height: 450px; background-color: #ccc;"></div>
+                <img
+                  src="static/images/r1_analysis_example.png"
+                  alt="R1 Analysis Examples"
+                  width="30%"
+                /> -->
+                </div>
+                <p>
+                  <!-- TODO: Add a brief description of the experiment setup and results. -->
+                </p>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section" , id="Meta Reinforcement Finetuning">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <h2 class="title is-3" id="setup">Meta Reinforcement Finetuning</h2>
+            <h3 class="title is-4">Methodology</h3>
+            <div class="content has-text-justified">
+            </div>
+            <h3 class="title is-4">Results</h3>
+            <div class="content has-text-justified">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--BibTex citation -->
+    <section class="section" id="BibTeX">
+      <div class="container is-max-desktop content">
+        <h2 class="title">BibTeX</h2>
+        <pre><code>
+
+        </code></pre>
+      </div>
+    </section>
+    <!--End BibTex citation -->
+
+    <footer class="footer">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-8">
+            <div class="content">
+              <p>
+                Corresponding Author:
+                <a href="mailto:yuxiaoq@andrew.cmu.edu">Yuxiao Qu</a>
+                <br />
+                This page was built using the
+                <a
+                  href="https://github.com/eliahuhorwitz/Academic-project-page-template"
+                  target="_blank"
+                  >Academic Project Page Template</a
+                >
+                which was adopted from the <a
+                  href="https://nerfies.github.io"
+                  target="_blank"
+                  >Nerfies</a
+                > project page.
+                <br />
+                This website is licensed under a
+                <a
+                  rel="license"
+                  href="http://creativecommons.org/licenses/by-sa/4.0/"
+                  target="_blank"
+                  >Creative Commons Attribution-ShareAlike 4.0 International
+                  License</a
+                >.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Statcounter tracking code -->
+
+    <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+  </body>
+</html>
