@@ -193,9 +193,9 @@
           <img src="static/images/teaser.png" alt="Meta Reinforcement Finetuning" class="mx-auto"/>
         </div>
       </div>
-      <h2 class="subtitle">
-        <b>Standard outcome-reward reinforcement fine-tuning vs. our meta reinforcement fine-tuning (MRT).</b> Standard techniques for fine-tuning LLMs to use test-time compute optimize outcome reward at the end of a long trace but this does not incentivize the model to make use of intermediate tokens to make progress (<i>i.e.</i>, probability of eventual success) which leads to <b>1)</b> very long output traces, <b>2)</b> inhibits learning of a way that can make steady progress on new, hard problems as shown in <b>(a)</b>. <b><i>MRT</i></b> <b>(b)</b> trains the LLM to optimize for cumulative regret with respect to the oracle, over the entire thinking trace (shaded area) by optimizing a dense reward function in addition to sparse 0/1 reward and thus alleviates both challenges in <b>(a)</b>.
-      </h2>
+      <p class="tw-text-left tw-text-sm tw-text-gray-500 tw-mt-4">
+      <b>Standard outcome-reward reinforcement fine-tuning vs. our meta reinforcement fine-tuning (MRT).</b> Standard techniques for fine-tuning LLMs to use test-time compute optimize outcome reward at the end of a long trace but this does not incentivize the model to make use of intermediate tokens to make progress (<i>i.e.</i>, probability of eventual success) which leads to <b>1)</b> very long output traces, <b>2)</b> inhibits learning of a way that can make steady progress on new, hard problems as shown in <b>(a)</b>. <b><i>MRT</i></b> <b>(b)</b> trains the LLM to optimize for cumulative regret with respect to the oracle, over the entire thinking trace (shaded area) by optimizing a dense reward function in addition to sparse 0/1 reward and thus alleviates both challenges in <b>(a)</b>.
+      </p>    
     </div>
   </div>
 </section>
