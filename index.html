@@ -127,7 +127,7 @@
                   <!-- ArXiv abstract Link -->
                   <span class="link-block">
                     <a
-                      href="http://arxiv.org/abs/2407.18219"
+                      href="http://arxiv.org/"
                       target="_blank"
                       class="external-link button is-normal is-rounded is-dark"
                     >
@@ -154,7 +154,7 @@
                   <!-- Github link -->
                   <span class="link-block">
                     <a
-                      href="https://github.com/cmu-mind/RISE"
+                      href="https://github.com/CMU-AIRe/MRT"
                       target="_blank"
                       class="external-link button is-normal is-rounded is-dark"
                     >
@@ -209,7 +209,7 @@
             <h2 class="title is-3">Abstract</h2>
             <div class="content has-text-justified">
               <p>
-                Training models to efficiently use test-time compute is crucial for improving the reasoning performance of LLMs. While current methods mostly do so via fine-tuning on search traces or running RL against the 0/1 outcome reward, do these approaches efficiently utilize test-time compute? Would these approaches continue to scale as the budget improves? In this paper, we try to answer these questions. We formalize the problem of optimizing test-time compute as a meta reinforcement learning (RL) problem, which provides a principled perspective on spending test-time compute from the lens of exploration and exploitation. It also motivates the use of cumulative regret to measure the efficacy of test-time compute by viewing a long output stream as consisting of several episodes from the model. While current state-of-the-art models do not optimize regret, we show that regret can be minimized by running final 0/1 reward RL regularized by a dense reward bonus, given by the <i>''information gain''</i> from each subsequent block in the output stream. We prescribe an approach for quantifying information gain, which measures the utility of an intermediate segment of tokens towards improving accuracy of the final answer. We instantiate this idea to develop <b><i>MRT</i></b>, a new class of finetuning methods for optimizing test-time compute. Fine-tuning with <b><i>MRT</i></b> leads to substantial improvements in both performance and token efficiency on various number of math benchmarks.
+                Training models to effectively use test-time compute is crucial for improving the reasoning performance of LLMs. Current methods mostly do so via fine-tuning on search traces or running RL with 0/1 outcome reward, but do these approaches efficiently utilize test-time compute? Would these approaches continue to scale as the budget improves? In this paper, we try to answer these questions. We formalize the problem of optimizing test-time compute as a meta-reinforcement learning (RL) problem, which provides a principled perspective on spending test-time compute. This perspective enables us to view the long output stream from the LLM as consisting of several episodes run at test time and leads us to use a notion of <b>cumulative regret</b> over output tokens as a way to measure the efficacy of test-time compute. Akin to how RL algorithms can best tradeoff exploration and exploitation over training, minimizing cumulative regret would also provide the best balance between exploration and exploitation in the token stream. While we show that state-of-the-art models do not minimize regret, one can do so by maximizing a <b>dense</b> reward bonus in conjunction with the outcome 0/1 reward RL. This bonus is the "progress" made by each subsequent block in the output stream, quantified by the change in the likelihood of eventual success. Using these insights, we develop <b>M</b>eta <b>R</b>einforcment Fine-<b>T</b>uning, or <b>MRT</b>, a new class of fine-tuning methods for optimizing test-time compute. <b>MRT</b> leads to a 2-3x relative gain in performance and roughly a 1.5x gain in token efficiency for math reasoning compared to outcome-reward RL.
               </p>
             </div>
           </div>
@@ -570,8 +570,8 @@
                 />
                 </div>
                 <p class="tw-text-left tw-text-sm tw-text-gray-500 tw-mt-4">
-                <b>MRT</b> results on DeepSeek-R1-Distill-Qwen-1.5B. We plot maj@k performance of models for k = 1, 2, ..., 10 on AIME 2024 (left) and MATH500 (right). The orange lines correspond to <b>MRT</b> and the green lines correspond to outcome-reward training.</a>
-              </p>    
+                <b>MRT</b> results on DeepSeek-R1-Distill-Qwen-1.5B. We plot maj@k performance of models for k = 1, 2, ..., 10 on AIME 2024 (left) and MATH500 (right). The orange lines correspond to <b>MRT</b> and the green lines correspond to outcome-reward training.
+                </p>    
               <div class="content has-text-justified tw-bg-orange-100 p-3 rounded-lg text-center mb-4">
               <p><b>Key Findings</b></p>
                 <ul>
@@ -613,34 +613,84 @@
               <p>We studied the relationship between progress (the dense reward signal used in MRT) and response length, which has been considered a crucial factor in recent advances from DeepSeek and others. We investigated two key questions:</p>
               <div class="content has-text-justified tw-bg-blue-100 p-3 rounded-lg text-center mb-4">
                 <p><b>Question 1:</b> How does length evolve during training with MRT and outcome-reward RL over a fixed prompt distribution?</p>
-
+              </div>
+              <div style="display: flex; justify-content: center; gap: 20px; align-items: center;"><img
+                  src="static/images/training_completion_length_deepscale.png"
+                  alt="Training Completion Length"
+                  width="40%"
+                />
+              </div>
+              <p class="tw-text-left tw-text-sm tw-text-gray-500 tw-mt-4">
+                Evolution of length during RL training. Length largely oscillates around similar values for most of training, after an initial increase from the initialization length.
+                </p>
+                <div class="content has-text-justified tw-bg-orange-100 p-3 rounded-lg text-center mb-4">
+                  <p><b>Key Findings</b></p>
+                  <ul>
+                    <li>The average completion length generally oscillates around ~5000 tokens during training with both MRT (RL) and GRPO on the AIME dataset</li>
+                    <li>Compared to GRPO, <b>MRT slightly reduces response length</b> (the orange curve generally falls below the green curve)</li>
+                    <li>This aligns with our expectation that optimizing for progress should lead to some reduction in token length</li>
+                    <li>However, this decrease is not as dramatic as the one seen with an explicit length penalty, which reduces length at the cost of worse performance</li>
+                  </ul>
+                </div>
+                <div class="content has-text-justified tw-bg-blue-100 p-3 rounded-lg text-center mb-4">
+                <p><b>Question 2:</b> Question 2: Can the benefits of increasing output token budget be explained by enhanced progress?</p>
+                </div> 
+                <p>Despite the supposed gains from running RL training with a large output budget from the beginning, several studies have found that training at higher budgets results in inefficient compute use. Concurrent work finds that a more effective approach is to:</p>
+                <ol>
+                    <li>Initialize RL training with a smaller output token budget (8K tokens)</li>
+                    <li>Expand this budget to 16K after half of the training</li>
+                </ol>
+                <p>This raises the question: What benefits does such a "curriculum" over output token budget provide?</p>
+                              <div style="display: flex; justify-content: center; gap: 20px; align-items: center;"><img
+                  src="static/images/deepscaler_length_performance.png"
+                  alt="AIME Maj@k"
+                  width="50%"
+                />
+                <img
+                  src="static/images/8k16k.png"
+                  alt="MATH500 Maj@k"
+                  width="37%"
+                />
+                </div>
+                <p class="tw-text-left tw-text-sm tw-text-gray-500 tw-mt-4">
+                <b>Left:</b>(Source:) DeepScaleR’s average response length and training rewards as training progresses. <b>Right:</b> Regret for 8K and 16K DeepScaleR checkpoints at different budgets. For budgets beyond 8192, we calculate the normalized regret of the 8K checkpoint by extrapolating it with budget forcing. At nearly all budgets, the 8K checkpoint shows lower normalized regret, indicating better progress.
+                </p> 
+                <p>Our comprehensive analysis of the curriculum learning reveals:</p>
+                <ul>
+                  <li><b>Performance increases while length reduces</b>, demonstrating that increasing length is not necessary for performance improvement</li>
+                  <li>The 8K checkpoint attains lower normalized regret compared to the 16K model, meaning each episode makes more efficient progress</li>
+                  <li>When extrapolating the 8K checkpoint to 16K evaluation tokens via budget forcing, it achieves similar normalized regret to the 16K checkpoint</li>
+                  <li>The change in accuracy per token/episode is higher during this initial phase than during the subsequent 16K budget phase</li>
+                  <li>This curriculum approach (starting with 8K, then increasing to 16K) achieves better overall performance than training with a 16K budget from scratch</li>
+              </ul>
+              <div class="content has-text-justified tw-bg-orange-100 p-3 rounded-lg text-center mb-4">
+              <p><b>Key Findings</b></p>
+                <ul>
+                  <li>Simple length penalties improve token efficiency but ultimately sacrifice peak performance.</li>
+                  <li>Using dense rewards in MRT also does reduce length slightly, but increases performance.</li>
+                  <li>Existing approaches for using curricula over the maximum allowed token budget or multi-stage training serves as an implicit way to encourage progress over the course of RL training.</li>
+                </ul>
               </div>
             </div>
-            </div>
+              </div>
           </div>
         </div>
       </div>
     </section>
-        <!-- <section class="section" , id="Optimizing Test-Time Compute as Meta RL">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column is-full-width">
-            <h2 class="title is-3" id="setup">Optimizing Test-Time Compute as Meta RL</h2>
-            <h3 class="title is-4">Methodology</h3>
-            <div class="content has-text-justified">
-            </div>
-            <h3 class="title is-4">Results</h3>
-          </div>
-        </div>
-      </div>
-    </section> -->
-
     <!--BibTex citation -->
     <section class="section" id="BibTeX">
       <div class="container is-max-desktop content">
         <h2 class="title">BibTeX</h2>
         <pre><code>
-
+@misc{,
+      title={Optimizing Test-Time Compute via Meta Reinforcement Finetuning},
+      author={Yuxiao Qu*, Matthew Y. R. Yang*, Amrith Setlur, Lewis Tunstall, Edward Emanuel Beeching, Ruslan Salakhutdinov, Aviral Kumar},
+      year={2025},
+      eprint={},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={},
+}
         </code></pre>
       </div>
     </section>
