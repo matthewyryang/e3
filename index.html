@@ -170,6 +170,18 @@
                       <span>Code</span>
                     </a>
                   </span>
+                  <span class="link-block">
+                    <a
+                      href=""
+                      target="_blank"
+                      class="external-link button is-normal is-rounded is-dark"
+                    >
+                      <span class="icon">
+                        <span class="icon">🤗</span>
+                      </span>
+                      <span>Model</span>
+                    </a>
+                  </span>
                 </div>
               </div>
             </div>
@@ -219,9 +231,9 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column is-full-width">
-            <details>
-              <summary style="font-size: 2rem; font-weight: bold; cursor: pointer;">Problem Statement: Optimizing & Extrapolating Test-Time Compute</summary>
-            <!-- <h2 class="title is-3" id="setup">Problem Statement: Optimizing & Extrapolating Test-Time Compute</h2> -->
+            <!-- <details>
+              <summary style="font-size: 2rem; font-weight: bold; cursor: pointer;">Problem Statement: Optimizing & Extrapolating Test-Time Compute</summary> -->
+            <h2 class="title is-3" id="setup">Problem Statement: Extrapolating Test-Time Compute</h2>
               <!-- <h3 class="title is-4">Experiment Setup</h3> -->
               <div class="content has-text-justified">
                 <p>
@@ -238,7 +250,7 @@
               </div>
               </div>
             </div>
-          </details>
+          <!-- </details> -->
           </div>
         </div>
       </div>
@@ -247,9 +259,9 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column is-full-width">
-            <details>
-              <summary style="font-size: 2rem; font-weight: bold; cursor: pointer;">Final Results with <span style="font-family: monospace;">e3</span>: State-of-the-art &lt; 2B Model on AIME and HMMT’25</summary>
-            <!-- <h2 class="title is-3" id="setup">Final Results with <span style="font-family: monospace;">e3</span>: State-of-the-art &lt; 2B Model on AIME and HMMT’25 </h2> -->
+            <!-- <details> -->
+              <!-- <summary style="font-size: 2rem; font-weight: bold; cursor: pointer;">Final Results with <span style="font-family: monospace;">e3</span>: State-of-the-art &lt; 2B Model on AIME and HMMT’25</summary> -->
+            <h2 class="title is-3" id="setup">Final Results with <span style="font-family: monospace;">e3</span>: SOTA &lt; 2B on AIME and HMMT’25 </h2>
             <div class="content has-text-justified">
               <p>
                 To achieve better extrapolation performance, apply our recipe <span style="font-family: monospace;">e3</span> to the Qwen3-1.7B base model and evaluate it on AIME'25 and HMMT'25 against open-source models.
@@ -300,7 +312,7 @@
                 </tbody>
               </table>
             </div>
-            </details>
+            <!-- </details> -->
           </div>
         </div>
       </div>
@@ -309,9 +321,7 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column is-full-width">
-            <!-- <h2 class="title is-3" id="setup">Ingredient 1: Asymmetries in the Base Model</h2> -->
-            <details>
-              <summary style="font-size: 2rem; font-weight: bold; cursor: pointer;">Ingredient 1: Asymmetries in the Base Model</summary>
+            <h2 class="title is-3" id="setup">Ingredient 1: Asymmetries in the Base Model</h2>
               <div class="content has-text-justified">
                 <p>
                   When the base model exhibits asymmetric incompetence at different skills (<i>e.g., </i> when the model is more accurate at verifying its own answers than it is at generating correct ones), RL post-training prefers to learn solutions that <b>chains asymmetries</b> in ways that improve final performance.
@@ -333,7 +343,7 @@
                   As shown above, when asymmetries such as the VG gap are present (<i>e.g.,</i> in base models for the Countdown task), RL training amplifies response length by chaining more asymmetries to explore in-context, where the probability of success improves with higher length on both training and extrapolation regimes. On the other hand, when VG gap is absent in the base model (<i>e.g.,</i> in the multiplication task), increases in length and extrapolation performance are subdued. When we explicitly train on a base model fine-tuned to verify multiplication (Mult w. verify), we again observe upward length and extrapolation trends also seen in Countdown.
                 </p>
             </div>
-            <div class="content has-text-justified tw-bg-orange-100 p-3 rounded-lg text-center mb-4" style="margin-top: 10px;">
+            <div class="content has-text-justified tw-bg-blue-100 p-3 rounded-lg text-center mb-4" style="margin-top: 10px;">
             <b>Key Findings</b>
               <ul>
                 <li>Asymmetries like the VG gap enable the model to continually explore, verify, and refine answers.</li>
@@ -341,7 +351,6 @@
                   in-context, thus benefiting from additional test-time compute beyond the training budget.</li>
               </ul>
             </div>
-          </details>
           </p>
           </div>
           </div>
@@ -352,8 +361,7 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column is-full-width">
-            <details>
-              <summary style="font-size: 2rem; font-weight: bold; cursor: pointer;">Ingredient 2: Negative Gradient in RL Enables Chaining</summary>
+            <h2 class="title is-3" id="">Ingredient 2: Negative Gradient in RL Enables Chaining</h2>
             <div class="content has-text-justified">
                 <p>
                   Most RL post-training methods such as REINFORCE, PPO, and GRPO adopt the following policy gradient update rule:
@@ -376,7 +384,7 @@
                     Negative gradients also promote diverse responses, as shown by the higher per-token entropy.
                   </p>
                 </div>
-                <div class="content has-text-justified tw-bg-orange-100 p-3 rounded-lg text-center mb-4" style="margin-top: 10px;">
+                <div class="content has-text-justified tw-bg-blue-100 p-3 rounded-lg text-center mb-4" style="margin-top: 10px;">
                   <b>Key Findings</b>
                   <ul>
                     <li>Negative gradients in RL “move” probability from short-length incorrect answers onto other
@@ -386,7 +394,6 @@
                     <li>Negative gradients boost response diversity and thus coverage over correct answers.</li>
                   </ul>
                 </div>
-                </details>
                 </div>
               </div>
             </div>
@@ -397,9 +404,7 @@
               <div class="container is-max-desktop">
                 <div class="columns is-centered">
                   <div class="column is-full-width">
-                    <details>
-                    <summary style="font-size: 2rem; font-weight: bold; cursor: pointer;">Ingredient 3: Coupled Curricula Training Structures Exploration in RL</summary>
-                    <!-- <h2 class="title is-3" id="">Ingredient 3: Coupled Curricula Training Structures Exploration in RL</h2> -->
+                    <h2 class="title is-3" id="">Ingredient 3: Coupled Curricula Structures RL Exploration</h2>
                     <h3 class="title is-4">Training on Static Budgets or Data Mixtures is Insufficient</h3>
                       <div class="content has-text-justified">
                         <p>
@@ -441,7 +446,7 @@
                       </p>
                       </div>
               
-            <div class="content has-text-justified tw-bg-orange-100 p-3 rounded-lg text-center mb-4" style="margin-top: 10px;">
+            <div class="content has-text-justified tw-bg-blue-100 p-3 rounded-lg text-center mb-4" style="margin-top: 10px;">
 
             
               <b>Key Findings</b>
@@ -451,7 +456,6 @@
                 <li>By fine-tuning Qwen3-1.7B with <span style="font-family: monospace;">e3</span> we outperform &lt; 2B models on AIME’25, HMMT ’25.</li>
               </ul>
             </div>
-          </details>
           </div>
         </div>
       </div>
@@ -461,9 +465,7 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column is-full-width">
-            <details>
-              <summary style="font-size: 2rem; font-weight: bold; cursor: pointer;">Example Traces and Asymmetries</summary>
-            <!-- <h2 class="title is-3" id="setup">Final Results with <span style="font-family: monospace;">e3</span>: State-of-the-art &lt; 2B Model on AIME and HMMT’25 </h2> -->
+            <h2 class="title is-3" id="setup">Example Traces and Asymmetries</h2>
             <div class="content has-text-justified">
                 <p>
                 <details style="max-width: 100%; overflow-x: auto;">
@@ -626,7 +628,7 @@ Starting with the units place: 3 × 347. Let me compute that:
 3 × 7 = 21. I write down 1 and carry over 2.
 3 × 4 = 12, plus the carried over 2 makes 14. Write down 4 and carry over 1.
 3 × 3 = 9, plus the carried over 1 makes 10. Write down 10.
-So, 3 × 347 = 1041. Let me check that again:
+So, 3 × 347 = 1041. <span style="background-color: yellow;">Let me check that again:</span>
 3 × 7 = 21 (correct), 3 × 4 = 12 + 2 = 14 (correct), 3 × 3 = 9 + 1 = 10 (correct). So
 that’s 1041. Alright.
 Check: 3 × 347 = 1041. Correct.
@@ -637,8 +639,8 @@ and then add a zero at the end.
 8 × 7 = 56. Write down 6, carry over 5.
 8 × 4 = 32, plus the carried over 5 makes 37. Write down 7, carry over 3.
 8 × 3 = 24, plus the carried over 3 makes 27. Write down 27.
-So, 8 × 347 = 2776. Then add the zero for the tens place, making it 27760. Let me
-verify:
+So, 8 × 347 = 2776. Then add the zero for the tens place, making it 27760. <span style="background-color: yellow;">Let me
+verify:</span>
 8 × 347. 8×300=2400, 8×40=320, 8×7=56. 2400+320=2720, 2720+56=2776. Then adding the
 zero gives 27760. Correct.
 Check: 8 × 347 = 2776, so 2776 × 10 = 27760. Correct.
@@ -648,7 +650,7 @@ Now, the hundreds place. The digit here is 5, but it’s in the hundreds place, 
 5 × 7 = 35. Write down 5, carry over 3.
 5 × 4 = 20, plus the carried over 3 makes 23. Write down 3, carry over 2.
 5 × 3 = 15, plus the carried over 2 makes 17. Write down 17.
-So, 5 × 347 = 1735. Then add two zeros, making it 173500. Let me verify:
+So, 5 × 347 = 1735. Then add two zeros, making it 173500. <span style="background-color: yellow;">Let me verify:</span>
 5 × 347. 5×300=1500, 5×40=200, 5×7=35. 1500+200=1700, 1700+35=1735. Then adding two
 zeros gives 173500. Correct.
 Check: 5 × 347 = 1735, so 1735 × 100 = 173500. Correct.
@@ -659,7 +661,7 @@ Let me do this step by step. First, add 1041 and 27760:
 +27760
 ––––
 28801
-Wait, 1041 + 27760: 1000 + 27760 = 28760, then +41 = 28801. Let me check with another
+<span style="background-color: yellow;">Wait</span>, 1041 + 27760: 1000 + 27760 = 28760, then +41 = 28801. Let me check with another
 method:
 20000 + 7000 = 27000, 700 + 60 = 760, 27000 + 760 = 27760. Then 27760 + 1000 = 28760,
 +41 = 28801. Correct.
@@ -670,7 +672,7 @@ Now add this result to 173500:
 +173500
 ––––-
 202301
-Wait, 28000 + 173500 = 201500, then 801 + 0 = 801, so total 201500 + 801 = 202301. Let
+<span style="background-color: yellow;">Wait</span>, 28000 + 173500 = 201500, then 801 + 0 = 801, so total 201500 + 801 = 202301. Let
 me verify another way:
 28801 + 173500. Break down 173500 into 170000 + 3500. Then 28801 + 170000 = 198801.
 Then 198801 + 3500 = 202301. Correct.
@@ -684,11 +686,201 @@ The product of 347 and 583 is 202301.</code></pre></details>
 <p>
                 <details style="max-width: 100%; overflow-x: auto;">
                   <summary style="font-weight: bold; cursor: pointer;">Example of chained asymmetries in Math</summary>
-                    <pre><code>&lt;think&gt; </code></pre></details>
+                    <pre style="white-space: pre-wrap; word-break: break-word; overflow-wrap: anywhere;"><code>&lt;think&gt;
+Okay, so I need to find all integer bases b greater than 9 where 17 base b divides 97 base b. Then sum all those bases. Hmm, let me think about how to approach this.
+ 
+First, I remember that numbers in different bases can be converted to decimal (base 10) numbers. So, if I have 17_b, that would be 1*b + 7, right? Similarly, 97_b is 9*b + 7. So, the problem is asking for bases b > 9 such that 9*b + 7 is divisible by 1*b + 7. In other words, (9b + 7) divided by (b + 7) is an integer.
+ 
+So, mathematically, I can write this as:
+ 
+(9b + 7) / (b + 7) is an integer.
+ 
+Let me denote that as:
+ 
+Let me write it as:
+ 
+(9b + 7) / (b + 7) = integer.
+ 
+I need to find all integers b > 9 such that this fraction is integer.
+ 
+Hmm. Let me try to simplify this expression. Maybe perform polynomial division or manipulate it algebraically.
+ 
+Let me think. Let me write 9b + 7 as something times (b + 7) plus a remainder.
+ 
+Let me do polynomial division. Let me divide 9b + 7 by b + 7.
+ 
+Dividing 9b + 7 by b + 7. The leading term is 9b divided by b, which is 9. Multiply (b + 7) by 9: 9b + 63. Subtract that from 9b + 7:
+ 
+(9b + 7) - (9b + 63) = 0b - 56. So, the division gives 9 with a remainder of -56. Therefore:
+ 
+(9b + 7)/(b + 7) = 9 - 56/(b + 7). 
+ 
+Ah, so that means that for the entire expression to be an integer, 56/(b + 7) must be an integer. Therefore, b + 7 divides 56.
+ 
+Therefore, b + 7 is a positive divisor of 56, and since b > 9, then b + 7 must be greater than 9 + 7 = 16. Therefore, b + 7 must be a positive divisor of 56 that is greater than 16.
+ 
+<span style="background-color: yellow;">Wait</span>, but divisors of 56 are positive integers. Let me list all positive divisors of 56 first.
+ 
+First, prime factorization of 56: 56 = 7 * 8 = 7 * 2^3. Therefore, the positive divisors are 1, 2, 4, 7, 8, 14, 28, 56.
+ 
+So, divisors are 1, 2, 4, 7, 8, 14, 28, 56.
+ 
+Now, since b + 7 must be greater than 16, because b > 9 implies b + 7 > 16. Therefore, looking at the divisors greater than 16: 28 and 56.
+ 
+<span style="background-color: yellow;">Wait</span>, 14 is 14, which is less than 16, so no. 28 and 56 are the ones greater than 16. Therefore, possible values for b + 7 are 28 and 56.
+ 
+Therefore, b = 28 - 7 = 21 and b = 56 - 7 = 49.
+ 
+<span style="background-color: yellow;">Wait</span>, so the bases would be 21 and 49? Let me check if that's correct.
+ 
+<span style="background-color: yellow;">But hold on, let me verify this.</span>
+ 
+First, if b + 7 divides 56, then b + 7 is a positive divisor of 56, so possible values are 1,2,4,7,8,14,28,56. But since b > 9, then b + 7 > 16. Therefore, b + 7 must be 28 or 56. Therefore, b is 21 and 49.
+ 
+<span style="background-color: yellow;">But let me check</span> for example if b = 21, then 17 base 21 is 1*21 +7 = 28. 97 base 21 is 9*21 +7 = 189 +7 = 196. Now check if 28 divides 196. 196 divided by 28 is 7. Yes, 28*7=196. So that works.
+ 
+Similarly, for b=49: 17 base 49 is 1*49 +7=56. 97 base 49 is 9*49 +7= 441 +7=448. 448 divided by 56 is 8. 56*8=448. Correct. So both work.
+ 
+Therefore, the bases are 21 and 49, so their sum is 21 + 49 = 70. Therefore, the answer is 70?
+ 
+<span style="background-color: yellow;">Wait</span>, but let me check if there are other divisors?
+ 
+<span style="background-color: yellow;">Wait</span>, the problem says "integer bases b>9". So are there any other divisors?
+ 
+<span style="background-color: yellow;">Wait</span>, for example, if b + 7 is equal to 28 or 56, but maybe negative divisors? But since b is a base, it must be a positive integer greater than 1? Wait, bases are positive integers greater than 1. So b must be an integer greater than 9, so b is at least 10. So b + 7 is at least 17. Therefore, the divisors of 56 greater than 16 are 28 and 56. So yes, only those two. Therefore, only two bases, 21 and 49. Therefore, sum is 70. So I think that is the answer.
+ 
+<span style="background-color: yellow;">But let me double-check</span> if there are other possibilities. Suppose that when I divided 9b +7 by b +7, I got 9 - 56/(b +7). Therefore, in order for the entire expression to be integer, 56/(b +7) must be integer. Therefore, b +7 divides 56. So yes. So the only possible divisors are those. Therefore, seems like only 21 and 49. Therefore, the answer is 21 + 49 = 70. 
+ 
+<span style="background-color: yellow;">But wait</span>, let me check if there are any other divisors. For example, maybe if b + 7 divides 56, but since 56 is 2^3 *7, the divisors are as I listed. So 1, 2, 4, 7, 8, 14, 28, 56. So 28 and 56 are the only ones above 16. Therefore, yes. So 21 and 49.
+ 
+Therefore, I think that is correct.
+ 
+<span style="background-color: yellow;">Wait</span>, just to be thorough, let me check if there are other possible divisors where maybe b +7 divides 56 but with negative divisors. But since b>9, b +7 is at least 17, so negative divisors would be negative, but since b is positive integer, b +7 is positive, so we don't have to consider negative divisors here.
+ 
+Therefore, conclusion is the sum is 21 + 49 = 70.
+ 
+**Final Answer**
+\boxed{70}
+&lt;/think&gt;
+ 
+To solve the problem, we are given two numbers in base $ b $, written as $ 17_b $ and $ 97_b $, and we are asked to find all integer bases $ b > 9 $ such that $ 17_b $ divides $ 97_b $, and then compute the sum of all such bases.
+ 
+---
+ 
+### Step 1: Convert to Decimal
+ 
+We can convert these numbers from base $ b $ to base 10:
+ 
+- $ 17_b = 1 \cdot b + 7 = b + 7 $
+- $ 97_b = 9 \cdot b + 7 = 9b + 7 $
+ 
+So the condition becomes:
+ 
+$$
+\frac{9b + 7}{b + 7} \in \mathbb{Z}
+$$
+ 
+---
+ 
+### Step 2: Simplify the Expression
+ 
+We perform polynomial division or rewrite the expression:
+ 
+$$
+\frac{9b + 7}{b + 7} = 9 - \frac{56}{b + 7}
+$$
+ 
+This is because:
+ 
+$$
+9b + 7 = (b + 7) \cdot 9 - 56
+$$
+ 
+So the expression becomes:
+ 
+$$
+\frac{9b + 7}{b + 7} = 9 - \frac{56}{b + 7}
+$$
+ 
+For this to be an integer, the term $ \frac{56}{b + 7} $ must be an integer.
+ 
+That is:
+ 
+$$
+b + 7 \mid 56
+$$
+ 
+So, $ b + 7 $ must be a **positive divisor** of 56.
+ 
+---
+ 
+### Step 3: List the Divisors of 56
+ 
+The prime factorization of 56 is:
+ 
+$$
+56 = 2^3 \cdot 7
+$$
+ 
+Thus, the positive divisors of 56 are:
+ 
+$$
+1, 2, 4, 7, 8, 14, 28, 56
+$$
+ 
+We now require $ b + 7 > 16 $ (since $ b > 9 \Rightarrow b + 7 > 16 $), so only the divisors **greater than 16** are:
+ 
+- $ 28, 56 $
+ 
+Therefore:
+ 
+$$
+b + 7 = 28 \Rightarrow b = 21 \\
+b + 7 = 56 \Rightarrow b = 49
+$$
+ 
+---
+ 
+### Step 4: Verify the Bases
+ 
+Let’s check both values of $ b $ to ensure that the original divisibility condition holds:
+ 
+- For $ b = 21 $:  
+  $$
+  17_{21} = 21 + 7 = 28 \\
+  97_{21} = 9 \cdot 21 + 7 = 189 + 7 = 196 \\
+  \frac{196}{28} = 7 \quad \text{(integer)}
+  $$
+ 
+- For $ b = 49 $:  
+  $$
+  17_{49} = 49 + 7 = 56 \\
+  97_{49} = 9 \cdot 49 + 7 = 441 + 7 = 448 \\
+  \frac{448}{56} = 8 \quad \text{(integer)}
+  $$
+ 
+Both are valid.
+ 
+---
+ 
+### Final Step: Compute the Sum
+ 
+The valid bases are $ 21 $ and $ 49 $. Their sum is:
+ 
+$$
+21 + 49 = \boxed{70}
+$$
+ 
+---
+ 
+### Final Answer
+ 
+$$
+\boxed{70}
+$$</code></pre></details>
                 </p>      
       
               </div>
-            </details>
           </div>
         </div>
       </div>
