@@ -226,7 +226,7 @@
                   Even though the true promise of test-time compute is extrapolation performance, we find that <b>current thinking models show miniscule gains when extrapolating to 2-3× the training budget</b>, as shown in the figure below.
                 </p>
                 <div style="display: flex; justify-content: center; gap: 20px; align-items: center;"><img
-                  src="static/images/aime_line.pdf"
+                  src="static/images/aime_line.png"
                   alt="open-source models"
                   width="50%"
                 />
@@ -260,7 +260,7 @@
                 </div> -->
 
                 <div style="display: block; justify-content: center; gap: 20px; align-items: center;"><img
-                  src="static/images/combined_vg_gap_with_verification.pdf"
+                  src="static/images/combined_vg_gap_with_verification.png"
                   alt=""
                   width="100%"
                 />
@@ -293,7 +293,7 @@
                 </p>
                 
                 <div style="display: block; justify-content: center; gap: 20px; align-items: center;"><img
-                  src="static/images/ng_all.pdf"
+                  src="static/images/ng_all.png"
                   alt=""
                   width="100%"
                   />
@@ -328,10 +328,10 @@
                         beyond their training budget. However, we show that training on just any arbitrarily chosen training token
                         budget <i>B<sub>tr</sub></i> with asymmetries and negative gradients is not enough.
                         <div style="display: flex; gap: 10px; text-align: center; margin-top: 10px;">
-                          <div><img src="static/images/static_data_vary_budget.pdf"><div>(a)</div></div>
-                          <div><img src="static/images/static_budget_vary_data.pdf"><div>(b)</div></div>
-                          <div><img src="static/images/lenhist_change_budget.pdf"><div>(c)</div></div>
-                          <div><img src="static/images/lenhist_change_data.pdf"><div>(d)</div></div>
+                          <div><img src="static/images/static_data_vary_budget.png"><div>(a)</div></div>
+                          <div><img src="static/images/static_budget_vary_data.png"><div>(b)</div></div>
+                          <div><img src="static/images/lenhist_change_budget.png"><div>(c)</div></div>
+                          <div><img src="static/images/lenhist_change_data.png"><div>(d)</div></div>
                         </div>
                         <p>
                           <b>(a), (c): Training solely at low or high <i>B<sub>tr</sub></i> is not desirable.</b> Training at the short budget <i>B<sub>tr</sub></i> = 4k “kills” in-context exploration since traces with more asymmetries that are longer than the training budget of 4k are negatively rewarded. 
@@ -351,9 +351,9 @@
                         </p>
                         <p>
                           <div style="display: flex; justify-content: center; gap: 20px; align-items: center;"><img
-                            src="static/images/countdown_curriculum_formula.pdf"
+                            src="static/images/countdown_curriculum_formula.png"
                             alt=""
-                            width="50%"
+                            width="30%"
                           />
                           To show the effectiveness of our curriculum design, we apply this curriculum to the Countdown task, where we initially train on easy problems (with 3, 4 numbers) at a budget of 256. Following the optimization objective above, to select the optimal budget for the next stage, we examine the performance of this first-stage model on the second-stage dataset consisting of harder problems with 7 numbers. We show that picking according to the optimization objective above leads to a budget of 1024, which indeed leads to the best post-trained extrapolation performance on the harder problems.
                         </p>
@@ -366,9 +366,9 @@
                 We apply our recipe <span style="font-family: monospace;">e3</span> to the Qwen3-1.7B base model and evaluate it on AIME'25 and HMMT'25 against open-source models.
                 As shown, at a test-time token budget of 32k tokens, <span style="font-family: monospace;">e3</span> achieves state-of-the-art performance on AIME'25 and HMMT'25, within a model class of size &lt; 2B. We outperform the best model in this class by &gt; 10% on AIME'25 in terms of peak performance, and show that our model, trained only up to a budget of 16k, extrapolates better than other models including s1.1-32B and OpenThinker-7B when we extrapolate them to 32k output tokens. Moreover, (c) shows that compared to budget forcing via "Wait", <span style="font-family: monospace;">e3</span> achieves substantially better scaling, without any form of prompting or budget forcing.
                 <div style="display: flex; gap: 10px; text-align: center; margin-top: 10px; justify-content: center;">
-                  <div><img src="static/images/method_plot_aime.pdf"><div>(a)</div></div>
-                  <div><img src="static/images/method_plot_hmmt.pdf"><div>(b)</div></div>
-                  <div><img src="static/images/wait_plot_extrapolation.pdf"><div>(c)</div></div>
+                  <div><img src="static/images/method_plot_aime.png"><div>(a)</div></div>
+                  <div><img src="static/images/method_plot_hmmt.png"><div>(b)</div></div>
+                  <div><img src="static/images/wait_plot_extrapolation.png"><div>(c)</div></div>
                 </div>
               </p>
 
