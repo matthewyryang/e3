@@ -214,11 +214,14 @@
       </div>
     </section>
     <!-- End paper abstract -->
+    
     <section class="section">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column is-full-width">
-            <h2 class="title is-3" id="setup">Problem Statement: Optimizing & Extrapolating Test-Time Compute</h2>
+            <details>
+              <summary style="font-size: 2rem; font-weight: bold; cursor: pointer;">Problem Statement: Optimizing & Extrapolating Test-Time Compute</summary>
+            <!-- <h2 class="title is-3" id="setup">Problem Statement: Optimizing & Extrapolating Test-Time Compute</h2> -->
               <!-- <h3 class="title is-4">Experiment Setup</h3> -->
               <div class="content has-text-justified">
                 <p>
@@ -235,135 +238,21 @@
               </div>
               </div>
             </div>
+          </details>
           </div>
         </div>
       </div>
     </section>
-    <section class="section" , id="">
+    <section class="section">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column is-full-width">
-            <h2 class="title is-3" id="setup">Asymmetries in the Base Model: A Prerequisite for In-Context Exploration</h2>
-              <div class="content has-text-justified">
-                <p><b>Setup.</b> We perform experiments on two didactic settings on top of Math reasoning: <b> (1) Countdown game</b>, where the model must generate a sequence of operations to reach a target number from a given set of numbers; and
-                <b>(2) N-digit multiplication</b>, where the model must multiply two n-digit numbers.
-                </p>
-                <p>
-                  When the base model exhibits asymmetric incompetence at different skills (<i>e.g., </i> when the model is more accurate at verifying its own answers than it is at generating correct ones), RL post-training prefers to learn solutions that <b>chains asymmetries</b> in ways that improve final performance.
-                </p>
-                <!-- <div class="content has-text-justified tw-bg-blue-100 p-3 rounded-lg text-center mb-4">
-                  <p><b>Chaining asymmetric capabilities <i>p</i>, <i>q</i> in model π</b></p>
-                  <p>Let <i>p</i>, <i>q</i>: 𝒮 &rarr; 𝒮 be functions over token sequences <span style="font-family: serif;">𝒮</span> (<i>e.g.</i>, <i>p</i> can be generation, <i>q</i> can be verification), and <span style="font-family: monospace;">detect(f, τ)</span> detects the number of calls to function <i>f</i> in a token trace <i>τ</i>. 
-                    For a reward <i>r</i>, we say that policy <i>π</i> chains asymmetries <i>p</i>, <i>q</i> if it benefits from calls to the composition <i>q(p(&middot;))</i>, compared to only <i>p(&middot;)</i>:</p>
-                    <div class="columns is-centered" style="margin-top: 10px;"><img src="https://latex.codecogs.com/svg.latex?\mathbb{E}_{\tau\sim\pi}[r(\tau)\mid\texttt{detect}(q(p(\cdot)),\tau)>0]\;>\;\mathbb{E}_{\tau \sim \pi}[r(\tau)\mid\texttt{detect}(p,\tau)>0]" alt="" /></div>
-                  <p>Even though there is an optimal policy that never calls <i>q</i>.
-                </div> -->
-
-                <div style="display: block; justify-content: center; gap: 20px; align-items: center;"><img
-                  src="static/images/combined_vg_gap_with_verification.png"
-                  alt=""
-                  width="100%"
-                />
-                <p style="margin-top: 10px;">
-                  As shown above, when asymmetries such as the VG gap are present (<i>e.g.,</i> in base models for the Countdown task), RL training amplifies response length by chaining more asymmetries to explore in-context, where the probability of success improves with higher length on both training and extrapolation regimes. On the other hand, when VG gap is absent in the base model (<i>e.g.,</i> in the multiplication task), increases in length and extrapolation performance are subdued. When we explicitly train on a base model fine-tuned to verify multiplication (Mult w. verify), we again observe upward length and extrapolation trends also seen in Countdown.
-                </p>
-            </div>
-            <div class="content has-text-justified tw-bg-orange-100 p-3 rounded-lg text-center mb-4" style="margin-top: 10px;">
-            <b>Key Findings</b>
-              <ul>
-                <li>Asymmetries like the VG gap enable the model to continually explore, verify, and refine answers.</li>
-                <li>RL training amplifies chaining of asymmetric skills and produces solutions that learn to explore
-                  in-context, thus benefiting from additional test-time compute beyond the training budget.</li>
-              </ul>
-            </div>
-        </div>
-      </div>
-    </section>
-    <section class="section" , id="">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column is-full-width">
-            <h2 class="title is-3" id="setup">Negative Gradients Incentivize Exploration that Chains Asymmetries</h2>
-            <div class="content has-text-justified">
-                <p>
-                  Most RL post-training methods such as REINFORCE, PPO, and GRPO adopt the following policy gradient update rule:
-                  <div class="columns is-centered" style="margin-top: 10px;"><img src="https://latex.codecogs.com/svg.image?\mathbb{E}_{\mathbf{y}\sim\tilde{\pi}(\cdot\mid\mathbf{x})}\;[A_i(\mathbf{x},\mathbf{y})\cdot\nabla_\pi\log\pi(\mathbf{y}\mid\mathbf{x})]" alt="" /></div>
-                  
-                  We refer to gradient terms multiplied by a negative advantage in the equation above as <b>negative gradients</b>. To understand how negative gradients can help with in-context exploration, we compare RL post-training with and without negative gradients. We remove negative gradients zeroing them out during training whilst retaining the positive gradient.
-                </p>
-                
-                <div style="display: block; justify-content: center; gap: 20px; align-items: center;"><img
-                  src="static/images/ng_all.png"
-                  alt=""
-                  width="100%"
-                  />
-                  <p style="margin-top: 10px;">
-                    As shown above, negative gradients amplify the chaining of asymmetries in two settings where the VG gap is large, leading to longer response lengths and improved extrapolation performance. 
-                    This is because amplifying asymmetries incentivizes the model to explore more, which in turn allows it to discover and chain additional asymmetries that improve its final answer.
-                    Negative gradients also promote diverse responses, as shown by the higher per-token entropy.
-                  </p>
-                </div>
-                <div class="content has-text-justified tw-bg-orange-100 p-3 rounded-lg text-center mb-4" style="margin-top: 10px;">
-                  <b>Key Findings</b>
-                  <ul>
-                    <li>Negative gradients in RL “move” probability from short-length incorrect answers onto other
-                      modes, e.g., those that exploit asymmetries or those that end in a correct answer. When the VG
-                      gap is large, longer responses that chain more asymmetries and eventually discover the right
-                      answer are rewarded and reinforced, encouraging in-context exploration. </li>
-                      <li>Negative gradients boost response diversity and thus coverage over correct answers.</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </section>
-            <section class="section" , id="">
-              <div class="container is-max-desktop">
-                <div class="columns is-centered">
-                  <div class="column is-full-width">
-                    <h2 class="title is-3" id="">Coupled Curriculum Training Structures Exploration in Long Length RL</h2>
-                    <h3 class="title is-4">Training on Static Budgets or Data Mixtures is Insufficient</h3>
-                      <div class="content has-text-justified">
-                        <p>
-                        In the presence of asymmetries, training with negative gradients produces models that can extrapolate
-                        beyond their training budget. However, we show that training on just any arbitrarily chosen training token
-                        budget <i>B<sub>tr</sub></i> with asymmetries and negative gradients is not enough.
-                        <div style="display: flex; gap: 10px; text-align: center; margin-top: 10px;">
-                          <div><img src="static/images/static_data_vary_budget.png"><div>(a)</div></div>
-                          <div><img src="static/images/static_budget_vary_data.png"><div>(b)</div></div>
-                          <div><img src="static/images/lenhist_change_budget.png"><div>(c)</div></div>
-                          <div><img src="static/images/lenhist_change_data.png"><div>(d)</div></div>
-                        </div>
-                        <p>
-                          <b>(a), (c): Training solely at low or high <i>B<sub>tr</sub></i> is not desirable.</b> Training at the short budget <i>B<sub>tr</sub></i> = 4k “kills” in-context exploration since traces with more asymmetries that are longer than the training budget of 4k are negatively rewarded. 
-                          On the other extreme, training at <i>B<sub>tr</sub></i> = 16k introduces significant optimization challenges, typical of policy gradients in long horizons suffering from high gradient variance.
-                        </p>
-                        <p>
-                          <b>(b), (d): Training on a static data mixture is insufficient.</b> We compare the naive training data mixture with equal proportions of all difficulties (easy + medium + hard) against easy, easy + medium  at <i>B<sub>tr</sub></i> = 8k. As shown in (b), the model trained on only easy problems obtains the best performance on OOD AIME’25 when extrapolating compute to 32k, because training on budgets smaller than the length of a typical response for the base model on that dataset penalizes in-context exploration early in training. 
-                        </p>
-                      </div>
-                    <h3 class="title is-4">Our Recipe <span style="font-family: monospace;">e3</span>: Coupled Curriculum for In-Context Exploration</h3>
-                      <div class="content has-text-justified">
-                        <p>
-                          So how should we choose the training budget <i>B<sub>tr</sub></i> and correspondingly, the prompt mixture for a given budget? We simplify curriculum design by fixing the dataset at each stage and progressively increasing task difficulty in a stage-wise manner, from easy to hard. Now, at each curriculum stage <i>i</i>, we define a dataset <i>D<sub>i</sub></i> and focus on selecting an appropriate token budget <i>B<sub>tr,i</sub></i>. The goal is to choose <i>B<sub>tr,i</sub></i> such that training with this budget encourages <b>in-context exploration</b>. We formulate this as the following optimization problem:
-                          <div class="columns is-centered" style="margin-top: 10px;"><img src="https://latex.codecogs.com/svg.image?\text{argmin}_{B\geq&space;B_0}B\;\;\text{s.t.}\;\;J(\pi_i;D_i,2\cdot&space;B)\;\leq\;\kappa\cdot&space;J(\pi_i;D_i,B),\;\;\kappa>1" alt="" /></div>
-
-                          where <i>J(π ; D , B)</i> denotes the performance of π at budget <i>B</i> on dataset <i>D</i>,  and the budget <i>B<sub>0</sub></i> denotes a reasonable minimal length for π on dataset <i>D<sub>i</sub></i>. κ represents the minimum ratio of performance at budget <i>2B</i> to that at <i>B</i> such that we consider it a significant enough improvement.
-                        </p>
-                        <p>
-                          <div style="display: flex; justify-content: center; gap: 20px; align-items: center;"><img
-                            src="static/images/countdown_curriculum_formula.png"
-                            alt=""
-                            width="30%"
-                          />
-                          To show the effectiveness of our curriculum design, we apply this curriculum to the Countdown task, where we initially train on easy problems (with 3, 4 numbers) at a budget of 256. Following the optimization objective above, to select the optimal budget for the next stage, we examine the performance of this first-stage model on the second-stage dataset consisting of harder problems with 7 numbers. We show that picking according to the optimization objective above leads to a budget of 1024, which indeed leads to the best post-trained extrapolation performance on the harder problems.
-                        </p>
-                      </div>
-              
-
-            <h3 class="title is-4">Final Results with <span style="font-family: monospace;">e3</span>: State-of-the-art &lt; 2B Model on AIME and HMMT’25 </h3>
+            <details>
+              <summary style="font-size: 2rem; font-weight: bold; cursor: pointer;">Final Results with <span style="font-family: monospace;">e3</span>: State-of-the-art &lt; 2B Model on AIME and HMMT’25</summary>
+            <!-- <h2 class="title is-3" id="setup">Final Results with <span style="font-family: monospace;">e3</span>: State-of-the-art &lt; 2B Model on AIME and HMMT’25 </h2> -->
             <div class="content has-text-justified">
               <p>
-                We apply our recipe <span style="font-family: monospace;">e3</span> to the Qwen3-1.7B base model and evaluate it on AIME'25 and HMMT'25 against open-source models.
+                To achieve better extrapolation performance, apply our recipe <span style="font-family: monospace;">e3</span> to the Qwen3-1.7B base model and evaluate it on AIME'25 and HMMT'25 against open-source models.
                 As shown, at a test-time token budget of 32k tokens, <span style="font-family: monospace;">e3</span> achieves state-of-the-art performance on AIME'25 and HMMT'25, within a model class of size &lt; 2B. We outperform the best model in this class by &gt; 10% on AIME'25 in terms of peak performance, and show that our model, trained only up to a budget of 16k, extrapolates better than other models including s1.1-32B and OpenThinker-7B when we extrapolate them to 32k output tokens. Moreover, (c) shows that compared to budget forcing via "Wait", <span style="font-family: monospace;">e3</span> achieves substantially better scaling, without any form of prompting or budget forcing.
                 <div style="display: flex; gap: 10px; text-align: center; margin-top: 10px; justify-content: center;">
                   <div><img src="static/images/method_plot_aime.png"><div>(a)</div></div>
@@ -411,6 +300,147 @@
                 </tbody>
               </table>
             </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section" , id="">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <!-- <h2 class="title is-3" id="setup">Ingredient 1: Asymmetries in the Base Model</h2> -->
+            <details>
+              <summary style="font-size: 2rem; font-weight: bold; cursor: pointer;">Ingredient 1: Asymmetries in the Base Model</summary>
+              <div class="content has-text-justified">
+                <p>
+                  When the base model exhibits asymmetric incompetence at different skills (<i>e.g., </i> when the model is more accurate at verifying its own answers than it is at generating correct ones), RL post-training prefers to learn solutions that <b>chains asymmetries</b> in ways that improve final performance.
+                </p>
+                <!-- <div class="content has-text-justified tw-bg-blue-100 p-3 rounded-lg text-center mb-4">
+                  <p><b>Chaining asymmetric capabilities <i>p</i>, <i>q</i> in model π</b></p>
+                  <p>Let <i>p</i>, <i>q</i>: 𝒮 &rarr; 𝒮 be functions over token sequences <span style="font-family: serif;">𝒮</span> (<i>e.g.</i>, <i>p</i> can be generation, <i>q</i> can be verification), and <span style="font-family: monospace;">detect(f, τ)</span> detects the number of calls to function <i>f</i> in a token trace <i>τ</i>. 
+                    For a reward <i>r</i>, we say that policy <i>π</i> chains asymmetries <i>p</i>, <i>q</i> if it benefits from calls to the composition <i>q(p(&middot;))</i>, compared to only <i>p(&middot;)</i>:</p>
+                    <div class="columns is-centered" style="margin-top: 10px;"><img src="https://latex.codecogs.com/svg.latex?\mathbb{E}_{\tau\sim\pi}[r(\tau)\mid\texttt{detect}(q(p(\cdot)),\tau)>0]\;>\;\mathbb{E}_{\tau \sim \pi}[r(\tau)\mid\texttt{detect}(p,\tau)>0]" alt="" /></div>
+                  <p>Even though there is an optimal policy that never calls <i>q</i>.
+                </div> -->
+
+                <div style="display: block; justify-content: center; gap: 20px; align-items: center;"><img
+                  src="static/images/combined_vg_gap_with_verification.png"
+                  alt=""
+                  width="100%"
+                />
+                <p style="margin-top: 10px;">
+                  As shown above, when asymmetries such as the VG gap are present (<i>e.g.,</i> in base models for the Countdown task), RL training amplifies response length by chaining more asymmetries to explore in-context, where the probability of success improves with higher length on both training and extrapolation regimes. On the other hand, when VG gap is absent in the base model (<i>e.g.,</i> in the multiplication task), increases in length and extrapolation performance are subdued. When we explicitly train on a base model fine-tuned to verify multiplication (Mult w. verify), we again observe upward length and extrapolation trends also seen in Countdown.
+                </p>
+            </div>
+            <div class="content has-text-justified tw-bg-orange-100 p-3 rounded-lg text-center mb-4" style="margin-top: 10px;">
+            <b>Key Findings</b>
+              <ul>
+                <li>Asymmetries like the VG gap enable the model to continually explore, verify, and refine answers.</li>
+                <li>RL training amplifies chaining of asymmetric skills and produces solutions that learn to explore
+                  in-context, thus benefiting from additional test-time compute beyond the training budget.</li>
+              </ul>
+            </div>
+          </details>
+          </p>
+          </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section" , id="">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <details>
+              <summary style="font-size: 2rem; font-weight: bold; cursor: pointer;">Ingredient 2: Negative Gradient in RL Enables Chaining</summary>
+            <div class="content has-text-justified">
+                <p>
+                  Most RL post-training methods such as REINFORCE, PPO, and GRPO adopt the following policy gradient update rule:
+                  <div class="columns is-centered" style="margin-top: 10px;"><img src="https://latex.codecogs.com/svg.image?\mathbb{E}_{\mathbf{y}\sim\tilde{\pi}(\cdot\mid\mathbf{x})}\;[A_i(\mathbf{x},\mathbf{y})\cdot\nabla_\pi\log\pi(\mathbf{y}\mid\mathbf{x})]" alt="" /></div>
+                  
+                  We refer to gradient terms multiplied by a negative advantage in the equation above as <b>negative gradients</b>. To understand how negative gradients can help with in-context exploration, consider the effect of negative gradients on an incorrect response <b><i>y</i></b> with tokens <i>y<sub>1</sub></i>, <i>y<sub>2</sub></i>, ..., <span style="font-family: monospace;">EOS</span>. Negative gradients <i>push down</i> the conditional probability <i>p(y<sub>i</sub>|<b>y<sub>1:i-1</sub></b>)</i>, which promotes response diversity (and thereby exploration) across gradient steps because it encourages the model to output different tokens than it had previously. This process also reduces the probability <i>p(<span style="font-family: monospace;">EOS</span> |<b>y</b>)</i> for any incorrect response that ends within the response budget, and moves probability lost here to other places, <i>e.g.,</i> continuing with “Wait, ...” instead of terminating with <span style="font-family: monospace;">EOS</span>.
+                </p>
+                <p>
+                  To verify this empirically, we compare RL post-training with and without negative gradients. In the latter setting, we zero out negative gradients during training whilst retaining the positive gradient.
+                </p>
+                
+                <div style="display: block; justify-content: center; gap: 20px; align-items: center;"><img
+                  src="static/images/ng_all.png"
+                  alt=""
+                  width="100%"
+                  />
+                  <p style="margin-top: 10px;">
+                    As shown above, negative gradients amplify the chaining of asymmetries in two settings where the VG gap is large, leading to longer response lengths and improved extrapolation performance. 
+                    This is because amplifying asymmetries incentivizes the model to explore more, which in turn allows it to discover and chain additional asymmetries that improve its final answer.
+                    Negative gradients also promote diverse responses, as shown by the higher per-token entropy.
+                  </p>
+                </div>
+                <div class="content has-text-justified tw-bg-orange-100 p-3 rounded-lg text-center mb-4" style="margin-top: 10px;">
+                  <b>Key Findings</b>
+                  <ul>
+                    <li>Negative gradients in RL “move” probability from short-length incorrect answers onto other
+                      modes, e.g., those that exploit asymmetries or those that end in a correct answer. When the VG
+                      gap is large, longer responses that chain more asymmetries and eventually discover the right
+                      answer are rewarded and reinforced, encouraging in-context exploration. </li>
+                    <li>Negative gradients boost response diversity and thus coverage over correct answers.</li>
+                  </ul>
+                </div>
+                </details>
+                </div>
+              </div>
+            </div>
+            </section>
+            
+            
+            <section class="section" , id="">
+              <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                  <div class="column is-full-width">
+                    <details>
+                    <summary style="font-size: 2rem; font-weight: bold; cursor: pointer;">Ingredient 3: Coupled Curricula Training Structures Exploration in RL</summary>
+                    <!-- <h2 class="title is-3" id="">Ingredient 3: Coupled Curricula Training Structures Exploration in RL</h2> -->
+                    <h3 class="title is-4">Training on Static Budgets or Data Mixtures is Insufficient</h3>
+                      <div class="content has-text-justified">
+                        <p>
+                          In the presence of asymmetries, training with negative gradients produces models that can extrapolate
+                          beyond their training budget. However, we show that training on just any arbitrarily chosen training token
+                          budget <i>B<sub>tr</sub></i> with asymmetries and negative gradients is not enough.
+                          <div style="display: flex; gap: 10px; text-align: center; margin-top: 10px; justify-content: center; align-items: center; align-self: center;">
+                            <div style="width: 35%;"><img src="static/images/static_data_vary_budget.png"><div>(a)</div></div>
+                            <div style="width: 35%;"><img src="static/images/static_budget_vary_data.png"><div>(b)</div></div>
+                          </div>
+                        </p>
+                        <p>
+                          <b>Training solely at low or high <i>B<sub>tr</sub></i> is not desirable.</b> As shown in (a), the training budget that leads to best extrapolation accuracy is 8k. Training at the short budget <i>B<sub>tr</sub></i> = 4k “kills” in-context exploration since traces with more asymmetries that are longer than the training budget of 4k are negatively rewarded. 
+                          On the other extreme, training at <i>B<sub>tr</sub></i> = 16k introduces significant optimization challenges, typical of policy gradients in long horizons suffering from high gradient variance.
+                        </p>
+                        <p>
+                          <b>Training on a static data mixture is insufficient.</b> We compare the naive training data mixture with equal proportions of all difficulties (easy + medium + hard) against easy, easy + medium  at <i>B<sub>tr</sub></i> = 8k. As shown in (b), the model trained on only easy problems obtains the best performance on OOD AIME’25 when extrapolating compute to 32k. This is because responses to harder problems require larger budgets, so training on harder problems leads to training on budgets smaller than the length of a typical response, which penalizes in-context exploration early in training.
+                        </p>
+                      </div>
+                    <h3 class="title is-4">Our Recipe <span style="font-family: monospace;">e3</span>: Coupled Curriculum for In-Context Exploration</h3>
+                      <div class="content has-text-justified">
+                        <p>
+                          So how should we choose the training budget <i>B<sub>tr</sub></i>? We simplify curriculum design by first fixing the dataset at each stage and progressively increasing task difficulty in a stage-wise manner, from easy to hard. Now, at each curriculum stage <i>i</i>, we define a dataset <i>D<sub>i</sub></i> and focus on selecting an appropriate token budget <i>B<sub>tr,i</sub></i>. The goal is to choose <i>B<sub>tr,i</sub></i> such that training with this budget encourages <b>in-context exploration</b>. To do so, we need to strike a balance between long <i>B<sub>tr,i</sub></i> that causes more difficult optimization / credit assignment and short <i>B<sub>tr,i</sub></i> that leads to less in-context exploration: our heuristic is to choose the <i>smallest</i> budget <i>B<sub>tr,i</sub></i> such that the model is positively rewarded for chaining more asymmetries at a budget of 2 · <i>B<sub>tr,i</sub></i> compared to <i>B<sub>tr,i</sub></i>. 
+                        </p>
+                          <!-- <div class="columns is-centered" style="margin-top: 10px;"><img src="https://latex.codecogs.com/svg.image?\text{argmin}_{B\geq&space;B_0}B\;\;\text{s.t.}\;\;J(\pi_i;D_i,2\cdot&space;B)\;\leq\;\kappa\cdot&space;J(\pi_i;D_i,B),\;\;\kappa>1" alt="" /></div>
+
+                          where <i>J(π ; D , B)</i> denotes the performance of π at budget <i>B</i> on dataset <i>D</i>,  and the budget <i>B<sub>0</sub></i> denotes a reasonable minimal length for π on dataset <i>D<sub>i</sub></i>. κ represents the minimum ratio of performance at budget <i>2B</i> to that at <i>B</i> such that we consider it a significant enough improvement.
+                        </p> -->
+                        <!-- <p>
+                          <div style="display: flex; justify-content: center; gap: 20px; align-items: center;"><img
+                            src="static/images/countdown_curriculum_formula.png"
+                            alt=""
+                            width="3cd 0%"
+                          />
+                          To show the effectiveness of our curriculum design, we apply this curriculum to the Countdown task, where we initially train on easy problems (with 3, 4 numbers) at a budget of 256. Following the optimization objective above, to select the optimal budget for the next stage, we examine the performance of this first-stage model on the second-stage dataset consisting of harder problems with 7 numbers. We show that picking according to the optimization objective above leads to a budget of 1024, which indeed leads to the best post-trained extrapolation performance on the harder problems.
+                        </p> -->
+                      <p>
+                        Following this insight, we choose the first stage budget to be 8k so that it has both sufficient exploration compared to 4k and is not as difficult to optimize as 16k, as observed in (a) of the graph in the previous subsection.
+                      </p>
+                      </div>
+              
             <div class="content has-text-justified tw-bg-orange-100 p-3 rounded-lg text-center mb-4" style="margin-top: 10px;">
 
             
@@ -421,8 +451,248 @@
                 <li>By fine-tuning Qwen3-1.7B with <span style="font-family: monospace;">e3</span> we outperform &lt; 2B models on AIME’25, HMMT ’25.</li>
               </ul>
             </div>
+          </details>
+          </div>
         </div>
       </div>
+    </section>
+
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <details>
+              <summary style="font-size: 2rem; font-weight: bold; cursor: pointer;">Example Traces and Asymmetries</summary>
+            <!-- <h2 class="title is-3" id="setup">Final Results with <span style="font-family: monospace;">e3</span>: State-of-the-art &lt; 2B Model on AIME and HMMT’25 </h2> -->
+            <div class="content has-text-justified">
+                <p>
+                <details style="max-width: 100%; overflow-x: auto;">
+                  <summary style="font-weight: bold; cursor: pointer;">Example of chained asymmetries in Countdown</summary>
+                    <pre><code>&lt;think&gt; Let me analyze this step by step:
+First, let’s try to get close to 466 with simple operations: 
+65 + 56 = 121 (too small)
+65 - 56 = 9 (too small)
+65 * 56 = way too large
+56 * 65 = way too large
+
+Let’s try working backwards from 466: 466 is much larger than any of the given
+numbers, so multiplication will likely be needed. We need to get from 37 to 466, which
+means we need to multiply by 12.5. But we don’t have 12.5, so we’ll need to create it
+through division.
+
+Let’s try: 
+37 * 14 = 518 (too large) 
+37 - 14 = 23 (too small) 
+37 + 14 = 51 (too small)
+
+Let’s try a different approach: 
+65 + 61 = 126
+126 + 56 = 182
+182 + 37 = 219 (getting closer)
+
+Let’s try: 
+65 + 61 = 126
+126 + 56 = 182
+182 + 37 = 219
+219 + 14 = 233 (still too small)
+
+Let’s try one more approach: 
+65 + 56 = 121 
+121 + 61 = 182 
+182 + 37 = 219 
+219 + 14 = 233 (still not 466)
+
+Let’s try: 
+65 + 56 = 121 
+121 + 61 = 182 
+182 + 37 = 219 
+219 + 14 = 233 (still not 466)
+
+One more attempt: 
+65 + 61 = 126 
+126 + 37 = 163 
+163 + 56 = 219 
+219 + 14 = 233 (still not 466)
+
+Final try: 
+65 + 61 = 126 
+126 + 56 = 182 
+182 + 37 = 219 
+219 - 14 = 205 (not quite there)
+
+Let’s try: 
+65 + 61 = 126 
+126 + 56 = 182 
+182 + 37 = 219 
+219 + 14 = 233 (still not 466)
+
+New approach: 
+65 + 61 = 126 
+126 + 56 = 182 
+182 - 37 = 145 
+145 + 14 = 159 (not quite there)
+
+Final attempt: 
+65 + 61 = 126 
+126 + 56 = 182 
+182 + 37 = 219 
+219 - 14 = 205 (not quite there)
+
+
+Let’s try: 
+65 + 56 = 121 
+121 + 61 = 182 
+182 + 37 = 219 
+219 - 14 = 205 (not quite there)
+
+One last try: 
+65 + 37 = 102 
+102 + 61 = 163 
+163 + 56 = 219 
+219 + 14 = 233 (not quite there)
+
+Final attempt: 
+56 + 14 = 70 
+70 + 65 = 135 
+135 + 37 = 172 
+172 + 61 = 233 (not quite there)
+
+New approach: 
+37 * 14 = 
+518 518 - 65 = 453 
+453 + 61 = 514 
+514 - 56 = 458 (not quite there)
+
+Final try: 
+61 * 14 = 
+854 854 - 65 = 789 
+789 - 56 = 733 
+733 - 37 = 696 (not quite there)
+
+Let’s try: 
+37 * 14 = 
+518 518 - 65 = 453 
+453 + 61 = 514 
+514 - 56 = 458 (not quite there)
+
+New approach: 
+56 * 37 = 2,052 
+2,052 / 65 approx. 31.5 (not helpful)
+
+Final attempt: 
+65 * 14 = 
+910 910 - 61 = 849 
+849 - 56 = 793 
+793 + 37 = 830 (not quite there)
+
+New approach: 
+61 * 37 = 2,237 
+2,237 - 65 = 1,172 
+1,172 - 56 = 1,116 
+1,116 + 14 = 1,130 (not quite there)
+
+New approach: 
+37 * 14 = 518 
+518 + 65 = 583 
+583 - 61 = 522 
+522 + 56 = 578 (not quite there)
+
+Final attempt: 
+65 * 14 = 910 
+910 - 61 = 849 
+849 + 56 = 905 
+905 - 37 = 868 (not quite there)
+
+New approach: 
+37 * 14 = 518 
+518 - 56 = 462 
+462 + 65 = 527 
+527 - 61 = 466 (This works!)
+&lt;/think&gt;
+&lt;answer&gt; (37 * 14 - 56 + 65) - 61 &lt;/answer&gt;</code></pre></details></p>
+               <p>
+                <details style="max-width: 100%; overflow-x: auto;">
+                  <summary style="font-weight: bold; cursor: pointer;">Example of chained asymmetries in Multiply w. verify</summary>
+                    <pre><code>&lt;think&gt; Okay, so I need to multiply 347 by 583. Hmm, let me think about how to approach this.
+I guess I can use the standard multiplication algorithm where you break it down by each
+digit. Let me start by writing both numbers down:
+347 × 583
+––––
+First, I’ll multiply 347 by each digit of 583 starting from the rightmost digit, which
+is 3 in this case. Then move to the next digit (8) and finally the leftmost digit (5),
+remembering to add the appropriate zeros for each subsequent multiplication. After
+that, I’ll sum all the results together. Let me start with the rightmost digit.
+Starting with the units place: 3 × 347. Let me compute that:
+3 × 7 = 21. I write down 1 and carry over 2.
+3 × 4 = 12, plus the carried over 2 makes 14. Write down 4 and carry over 1.
+3 × 3 = 9, plus the carried over 1 makes 10. Write down 10.
+So, 3 × 347 = 1041. Let me check that again:
+3 × 7 = 21 (correct), 3 × 4 = 12 + 2 = 14 (correct), 3 × 3 = 9 + 1 = 10 (correct). So
+that’s 1041. Alright.
+Check: 3 × 347 = 1041. Correct.
+Next, the tens place. The digit here is 8, but since it’s in the tens place, it’s
+actually 80. So, we’ll multiply 347 by 80. To make it easier, I can multiply 347 by 8
+and then add a zero at the end.
+8 × 347:
+8 × 7 = 56. Write down 6, carry over 5.
+8 × 4 = 32, plus the carried over 5 makes 37. Write down 7, carry over 3.
+8 × 3 = 24, plus the carried over 3 makes 27. Write down 27.
+So, 8 × 347 = 2776. Then add the zero for the tens place, making it 27760. Let me
+verify:
+8 × 347. 8×300=2400, 8×40=320, 8×7=56. 2400+320=2720, 2720+56=2776. Then adding the
+zero gives 27760. Correct.
+Check: 8 × 347 = 2776, so 2776 × 10 = 27760. Correct.
+Now, the hundreds place. The digit here is 5, but it’s in the hundreds place, so it’s
+500. So, multiply 347 by 500. Again, multiply 347 by 5 and add two zeros.
+5 × 347:
+5 × 7 = 35. Write down 5, carry over 3.
+5 × 4 = 20, plus the carried over 3 makes 23. Write down 3, carry over 2.
+5 × 3 = 15, plus the carried over 2 makes 17. Write down 17.
+So, 5 × 347 = 1735. Then add two zeros, making it 173500. Let me verify:
+5 × 347. 5×300=1500, 5×40=200, 5×7=35. 1500+200=1700, 1700+35=1735. Then adding two
+zeros gives 173500. Correct.
+Check: 5 × 347 = 1735, so 1735 × 100 = 173500. Correct.
+Now, add all three results together: 1041 + 27760 + 173500.
+Let me do this step by step. First, add 1041 and 27760:
+1041 + 27760. Let me line them up:
+1041
++27760
+––––
+28801
+Wait, 1041 + 27760: 1000 + 27760 = 28760, then +41 = 28801. Let me check with another
+method:
+20000 + 7000 = 27000, 700 + 60 = 760, 27000 + 760 = 27760. Then 27760 + 1000 = 28760,
++41 = 28801. Correct.
+Check: 1041 + 27760 = 28801. Correct.
+Now add this result to 173500:
+28801 + 173500. Let me line them up:
+28801
++173500
+––––-
+202301
+Wait, 28000 + 173500 = 201500, then 801 + 0 = 801, so total 201500 + 801 = 202301. Let
+me verify another way:
+28801 + 173500. Break down 173500 into 170000 + 3500. Then 28801 + 170000 = 198801.
+Then 198801 + 3500 = 202301. Correct.
+Check: 28801 + 173500 = 202301. Correct.
+So, putting all together, the final result is 202,301. Let me just cross-verify using
+another method to ensure I didn’t make any mistakes in the addition.
+&lt;/think&gt;
+The product of 347 and 583 is 202301.</code></pre></details>
+                </p>
+      
+<p>
+                <details style="max-width: 100%; overflow-x: auto;">
+                  <summary style="font-weight: bold; cursor: pointer;">Example of chained asymmetries in Math</summary>
+                    <pre><code>&lt;think&gt; </code></pre></details>
+                </p>      
+      
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+
     </section>
     <!--BibTex citation -->
     <section class="section" id="BibTeX">
